@@ -13,11 +13,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     canvas.cpp \
-    board.cpp
+    board.cpp \
+    city.cpp
 
 HEADERS  += mainwindow.h \
     canvas.h \
-    board.h
+    board.h \
+    city.h
 
 RESOURCES += \
     resources.qrc
