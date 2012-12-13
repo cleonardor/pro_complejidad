@@ -20,7 +20,7 @@ public:
     int getCoorX();
     int getCoorY();
 
-    QString getStringCity();
+    QString toString();
 
 };
 

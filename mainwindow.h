@@ -19,6 +19,9 @@ public:
 private:
     Canvas *canvas;
     Board *board;
+
+private slots:
+    void loadFileDoneSlot();
 };
 
 #endif // MAINWINDOW_H

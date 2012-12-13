@@ -26,9 +26,16 @@ MainWindow::MainWindow(QWidget *parent)
 
     setCentralWidget(widget);
     setWindowTitle(tr("Complejidad y Optimización"));
+
+    connect(board,SIGNAL(loadFileDoneSignal()),this,SLOT(loadFileDoneSlot()));
 }
 
 MainWindow::~MainWindow()
 {
     
+}
+
+void MainWindow::loadFileDoneSlot()
+{
+    this->canvas->drawState(this->board->getN(), this->board->getCitiesRef());
 }

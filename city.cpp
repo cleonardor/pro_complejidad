@@ -39,7 +39,7 @@ int City::getCoorY()
     return this->coorY;
 }
 
-QString City::getStringCity()
+QString City::toString()
 {
     QString city = "Number: " + QString::number(this->number) + " CoorX: " + QString::number(this->coorX) + " CoorY: " + QString::number(this->coorY);
     return city;
