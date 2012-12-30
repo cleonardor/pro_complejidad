@@ -14,12 +14,19 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     canvas.cpp \
     board.cpp \
-    city.cpp
+    city.cpp \
+    constraintsmanager.cpp \
+    solver.cpp
 
 HEADERS  += mainwindow.h \
     canvas.h \
     board.h \
-    city.h
+    city.h \
+    constraintsmanager.h \
+    solver.h
 
 RESOURCES += \
     resources.qrc
+
+LIBS += -L/usr/lib/lp_solve -llpsolve55
+INCLUDEPATH = /usr/include/lpsolve

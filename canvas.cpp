@@ -13,15 +13,18 @@ Canvas::Canvas(QObject *parent)
 Canvas::~Canvas()
 {}
 
-void Canvas::drawState(int n, QVector<City> *cities)
+/*
+ n: tamaño del tablero
+*/
+void Canvas::drawState(int m, QVector<City *> *cities)
 {
-    double dx = width()/n;
-    double dy = height()/n;
+    double dx = width()/m;
+    double dy = height()/m;
 
     this->clear();
 
     /*dibujar lienas verticales*/
-    for(int i=0;i<=n;i++)
+    for(int i=0;i<=m;i++)
     {
         QGraphicsLineItem *line = new QGraphicsLineItem(i*dx,0.0,i*dx,height());
         QPen pen(QColor(Qt::red));
@@ -30,7 +33,7 @@ void Canvas::drawState(int n, QVector<City> *cities)
     }
 
     /*dibujar lineas horizontales*/
-    for(int j=0;j<=n;j++)
+    for(int j=0;j<=m;j++)
     {
         QGraphicsLineItem *line = new QGraphicsLineItem(0.0,j*dy,width(),j*dy);
         QPen pen(QColor(Qt::red));
@@ -43,8 +46,8 @@ void Canvas::drawState(int n, QVector<City> *cities)
     {
         QPixmap pix(":/images/city3.png");
         QGraphicsPixmapItem *item = new QGraphicsPixmapItem(pix.scaled(dx,dy));
-        City c = cities->at(i);
-        item->setPos(c.getCoorX()*dx,(n-c.getCoorY()-1)*dy);
+        City *c = cities->at(i);
+        item->setPos(c->getCoorX()*dx,(m-c->getCoorY()-1)*dy);
         addItem(item);
     }
 }

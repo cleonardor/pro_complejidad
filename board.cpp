@@ -19,6 +19,7 @@ Board::Board(QWidget *parent)
     textEdit = new QPlainTextEdit("Sección para escribir lo que se quiera");
 
     connect(loadFileButton,SIGNAL(clicked()),this,SLOT(loadFileSlot()));
+    connect(runButton,SIGNAL(clicked()),this,SLOT(runSlot()));
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(loadFileButton);
@@ -40,6 +41,8 @@ Board::~Board()
 
 void Board::loadFileSlot()
 {
+    clearCities();
+
     QString fileName;
     fileName = QFileDialog::getOpenFileName(this,
          tr("Abrir"), "", tr("Archivo (*.txt)"));
@@ -57,8 +60,8 @@ void Board::loadFileSlot()
     QString line;
     QStringList row;
 
-    n = in.readLine().toInt();
-    amoutCities = in.readLine().toInt();
+    m = in.readLine().toInt();
+    amountCities = in.readLine().toInt();
 
     while (!in.atEnd())
     {
@@ -69,32 +72,47 @@ void Board::loadFileSlot()
         int coorX = row.at(1).toInt();
         int coorY = row.at(2).toInt();
 
-        City city(number, coorX, coorY);
+        City *city = new City(number, coorX, coorY);
         cities.append(city);
     }
     file.close();
 
     //imprimir ciudades
-    for(int i=0;i<cities.size();i++)
+    /*for(int i=0;i<cities.size();i++)
     {
-        City c = cities.at(i);
-        cout << c.toString().toStdString() << endl;
-    }
+        cout << cities.at(i)->toString().toStdString() << endl;
+    }*/
 
     emit loadFileDoneSignal();
 }
 
-int Board::getN()
+int Board::getM()
 {
-    return this->n;
+    return this->m;
 }
 
 int Board::getAmountCities()
 {
-    return this->amoutCities;
+    return this->amountCities;
 }
 
-QVector<City>* Board::getCitiesRef()
+QVector<City *> *Board::getCitiesRef()
 {
     return &cities;
+}
+
+void Board::runSlot()
+{
+    emit runSignal();
+}
+
+void Board::clearCities()
+{
+    for(int i=0;i<this->cities.size();i++)
+    {
+        City *c = this->cities.at(i);
+        delete c;
+        c = 0;
+    }
+    cities.clear();
 }

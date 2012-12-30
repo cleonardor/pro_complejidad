@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "canvas.h"
 #include "board.h"
+#include "solver.h"
 #include <QTextCodec>
 #include <QHBoxLayout>
 #include <QGraphicsView>
@@ -28,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle(tr("Complejidad y Optimización"));
 
     connect(board,SIGNAL(loadFileDoneSignal()),this,SLOT(loadFileDoneSlot()));
+    connect(board,SIGNAL(runSignal()),this,SLOT(runSlot()));
 }
 
 MainWindow::~MainWindow()
@@ -37,5 +39,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::loadFileDoneSlot()
 {
-    this->canvas->drawState(this->board->getN(), this->board->getCitiesRef());
+    this->canvas->drawState(this->board->getM(), this->board->getCitiesRef());
+}
+
+void MainWindow::runSlot()
+{
+    this->solver = new Solver(this->board->getM(),this->board->getCitiesRef());
+    this->solver->run();
 }

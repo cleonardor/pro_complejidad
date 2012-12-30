@@ -16,25 +16,29 @@ public:
     Board(QWidget *parent = 0);
     ~Board();
 
-    int getN();
+    int getM();
     int getAmountCities();
-    QVector<City>* getCitiesRef();
+    QVector<City *>* getCitiesRef();
 
 private:
-    int n;
-    int amoutCities;
-    QVector<City> cities;
+    int m;
+    int amountCities;
+    QVector<City *> cities;
 
     QPushButton *loadFileButton;
     QPushButton *seeFileButton;
     QPushButton *runButton;
     QPlainTextEdit *textEdit;
 
+    void clearCities();
+
 private slots:
         void loadFileSlot();
+        void runSlot();
 
 signals:
         void loadFileDoneSignal();
+        void runSignal();
 };
 
 #endif // BOARD_H
