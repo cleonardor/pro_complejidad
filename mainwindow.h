@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QtGui/QMainWindow>
+#include "solver.h"
 
 QT_BEGIN_NAMESPACE
 class Canvas;
@@ -19,9 +20,11 @@ public:
 private:
     Canvas *canvas;
     Board *board;
+    Solver *solver;
 
 private slots:
     void loadFileDoneSlot();
+    void runSlot();
 };
 
 #endif // MAINWINDOW_H

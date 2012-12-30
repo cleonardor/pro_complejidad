@@ -13,7 +13,7 @@ public:
     Canvas(QObject *parent);
     ~Canvas();
 
-    void drawState(int n, QVector<City> *cities);
+    void drawState(int m, QVector<City *> *cities);
 };
 
 #endif // CANVAS_H
