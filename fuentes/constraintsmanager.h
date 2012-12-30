@@ -4,12 +4,13 @@
 #include "city.h"
 #include "lp_lib.h"
 #include <QVector>
+#include <string>
 
 class ConstraintsManager
 {
 private:
     double **constraints;
-    QString *desigualdades;
+    std::string *inequalities;
     int *columnNumber;
 
     int amountConstraints;
@@ -25,6 +26,7 @@ private:
 
 public:
     ConstraintsManager(int m, QVector<City *> *cities);
+    ~ConstraintsManager();
 
     lprec* buildModel();
 };

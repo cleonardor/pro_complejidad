@@ -3,8 +3,6 @@
         <file>images/fileopen.png</file>
         <file>images/filesave.png</file>
         <file>images/run.png</file>
-        <file>images/city1.jpg</file>
-        <file>images/city2.jpg</file>
         <file>images/city3.png</file>
     </qresource>
 </RCC>

@@ -30,11 +30,19 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(board,SIGNAL(loadFileDoneSignal()),this,SLOT(loadFileDoneSlot()));
     connect(board,SIGNAL(runSignal()),this,SLOT(runSlot()));
+
+    this->solver = 0;
 }
 
 MainWindow::~MainWindow()
 {
-    
+    delete this->canvas;
+    delete this->board;
+    delete this->solver;
+
+    this->canvas = 0;
+    this->board = 0;
+    this->solver = 0;
 }
 
 void MainWindow::loadFileDoneSlot()
@@ -45,5 +53,5 @@ void MainWindow::loadFileDoneSlot()
 void MainWindow::runSlot()
 {
     this->solver = new Solver(this->board->getM(),this->board->getCitiesRef());
-    this->solver->run();
+    this->solver->findSolution();
 }

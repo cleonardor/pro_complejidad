@@ -11,7 +11,7 @@ ConstraintsManager::ConstraintsManager(int m, QVector<City *> *cities)
     this->cities = cities;
     this->amountConstraints = 11 + 17*cities->size() + 1;//1 porque se usa la última fila para la función objetivo
     this->amountVariables = 4 + 5*cities->size() + 1;//1 porque se usa para rhs, en realidad no es una variable
-    this->desigualdades = new QString[this->amountConstraints-1];
+    this->inequalities = new string[this->amountConstraints-1];
     this->columnNumber = new int[this->amountVariables-1];
     this->constraints = new double*[this->amountConstraints];
     for(int i=0;i<this->amountConstraints;i++)
@@ -33,6 +33,23 @@ ConstraintsManager::ConstraintsManager(int m, QVector<City *> *cities)
     }
 }
 
+ConstraintsManager::~ConstraintsManager()
+{
+    for(int i=0;i<this->amountConstraints;i++)
+    {
+        delete this->constraints[i];
+        this->constraints[i] = 0;
+    }
+    delete this->constraints;
+    //delete inequalities; si hago esto muere por un motivo que desconozco
+    delete columnNumber;
+
+    this->constraints = 0;
+    this->cities = 0;
+    //this->inequalities = 0;
+    this->columnNumber = 0;
+}
+
 void ConstraintsManager::buildContraints()
 {
     int n = this->cities->size();
@@ -43,7 +60,7 @@ void ConstraintsManager::buildContraints()
     this->constraints[constraintNumber][Ax] = 1;
     this->constraints[constraintNumber][Dx] = -1;
     this->constraints[constraintNumber][constant] = 0;
-    this->desigualdades[constraintNumber] = "<=";
+    this->inequalities[constraintNumber] = "<=";
     for(int i=0;i<n;i++)
     {
         this->constraints[constraintNumber][ci+i] = -this->cities->at(i)->getCoorX();
@@ -54,7 +71,7 @@ void ConstraintsManager::buildContraints()
     this->constraints[constraintNumber][Ax] = -1;
     this->constraints[constraintNumber][Dx] = -1;
     this->constraints[constraintNumber][constant] = 0;
-    this->desigualdades[constraintNumber] = "<=";
+    this->inequalities[constraintNumber] = "<=";
     for(int i=0;i<n;i++)
     {
         this->constraints[constraintNumber][ci+i] = this->cities->at(i)->getCoorX();
@@ -65,7 +82,7 @@ void ConstraintsManager::buildContraints()
     this->constraints[constraintNumber][Ay] = 1;
     this->constraints[constraintNumber][Dy] = -1;
     this->constraints[constraintNumber][constant] = 0;
-    this->desigualdades[constraintNumber] = "<=";
+    this->inequalities[constraintNumber] = "<=";
     for(int i=0;i<n;i++)
     {
         this->constraints[constraintNumber][ci+i] = -this->cities->at(i)->getCoorY();
@@ -76,7 +93,7 @@ void ConstraintsManager::buildContraints()
     this->constraints[constraintNumber][Ay] = -1;
     this->constraints[constraintNumber][Dy] = -1;
     this->constraints[constraintNumber][constant] = 0;
-    this->desigualdades[constraintNumber] = "<=";
+    this->inequalities[constraintNumber] = "<=";
     for(int i=0;i<n;i++)
     {
         this->constraints[constraintNumber][ci+i] = this->cities->at(i)->getCoorY();
@@ -90,7 +107,7 @@ void ConstraintsManager::buildContraints()
         this->constraints[constraintNumber][Sxi+i] = 2*this->m;
         this->constraints[constraintNumber][Dxi+i] = -1;
         this->constraints[constraintNumber][constant] = this->cities->at(i)->getCoorX();
-        this->desigualdades[constraintNumber] = ">=";
+        this->inequalities[constraintNumber] = ">=";
     }
 
     //Ax + 2M Sxi + Dxi <= 2M + cxi
@@ -101,7 +118,7 @@ void ConstraintsManager::buildContraints()
         this->constraints[constraintNumber][Sxi+i] = 2*this->m;
         this->constraints[constraintNumber][Dxi+i] = 1;
         this->constraints[constraintNumber][constant] = 2*this->m + this->cities->at(i)->getCoorX();
-        this->desigualdades[constraintNumber] = "<=";
+        this->inequalities[constraintNumber] = "<=";
     }
 
     //Ax - Dxi <= cxi
@@ -111,7 +128,7 @@ void ConstraintsManager::buildContraints()
         this->constraints[constraintNumber][Ax] = 1;
         this->constraints[constraintNumber][Dxi+i] = -1;
         this->constraints[constraintNumber][constant] = this->cities->at(i)->getCoorX();
-        this->desigualdades[constraintNumber] = "<=";
+        this->inequalities[constraintNumber] = "<=";
     }
 
     //-Ax - Dxi <= -cxi
@@ -121,7 +138,7 @@ void ConstraintsManager::buildContraints()
         this->constraints[constraintNumber][Ax] = -1;
         this->constraints[constraintNumber][Dxi+i] = -1;
         this->constraints[constraintNumber][constant] = -this->cities->at(i)->getCoorX();
-        this->desigualdades[constraintNumber] = "<=";
+        this->inequalities[constraintNumber] = "<=";
     }
 
     //Ay + 2M Syi - Dyi >= cyi
@@ -132,7 +149,7 @@ void ConstraintsManager::buildContraints()
         this->constraints[constraintNumber][Syi+i] = 2*this->m;
         this->constraints[constraintNumber][Dyi+i] = -1;
         this->constraints[constraintNumber][constant] = this->cities->at(i)->getCoorY();
-        this->desigualdades[constraintNumber] = ">=";
+        this->inequalities[constraintNumber] = ">=";
     }
 
     //Ay + 2M Syi + Dyi <= 2M + cyi
@@ -143,7 +160,7 @@ void ConstraintsManager::buildContraints()
         this->constraints[constraintNumber][Syi+i] = 2*this->m;
         this->constraints[constraintNumber][Dyi+i] = 1;
         this->constraints[constraintNumber][constant] = 2*this->m + this->cities->at(i)->getCoorY();
-        this->desigualdades[constraintNumber] = "<=";
+        this->inequalities[constraintNumber] = "<=";
     }
 
     //Ay - Dyi <= cyi
@@ -153,7 +170,7 @@ void ConstraintsManager::buildContraints()
         this->constraints[constraintNumber][Ay] = 1;
         this->constraints[constraintNumber][Dyi+i] = -1;
         this->constraints[constraintNumber][constant] = this->cities->at(i)->getCoorY();
-        this->desigualdades[constraintNumber] = "<=";
+        this->inequalities[constraintNumber] = "<=";
     }
 
     //-Ay - Dyi <= -cyi
@@ -163,7 +180,7 @@ void ConstraintsManager::buildContraints()
         this->constraints[constraintNumber][Ay] = -1;
         this->constraints[constraintNumber][Dyi+i] = -1;
         this->constraints[constraintNumber][constant] = -this->cities->at(i)->getCoorY();
-        this->desigualdades[constraintNumber] = "<=";
+        this->inequalities[constraintNumber] = "<=";
     }
 
     //sum[i=1][n]{ci} = 1
@@ -173,7 +190,7 @@ void ConstraintsManager::buildContraints()
         this->constraints[constraintNumber][ci+i] = 1;
     }
     this->constraints[constraintNumber][constant] = 1;
-    this->desigualdades[constraintNumber] = "=";
+    this->inequalities[constraintNumber] = "=";
 
     //Dx + Dy - Dxi - Dyi <= 0
     for(int i=0;i<n;i++)
@@ -184,7 +201,7 @@ void ConstraintsManager::buildContraints()
         this->constraints[constraintNumber][Dxi+i] = -1;
         this->constraints[constraintNumber][Dyi+i] = -1;
         this->constraints[constraintNumber][constant] = 0;
-        this->desigualdades[constraintNumber] = "<=";
+        this->inequalities[constraintNumber] = "<=";
     }
 
     //restricciones obvias
@@ -193,31 +210,31 @@ void ConstraintsManager::buildContraints()
     constraintNumber++;
     this->constraints[constraintNumber][Ax] = 1;
     this->constraints[constraintNumber][constant] = 0;
-    this->desigualdades[constraintNumber] = ">=";
+    this->inequalities[constraintNumber] = ">=";
     constraintNumber++;
     this->constraints[constraintNumber][Ax] = 1;
     this->constraints[constraintNumber][constant] = this->m-1;
-    this->desigualdades[constraintNumber] = "<=";
+    this->inequalities[constraintNumber] = "<=";
 
     //M-1 >= Ay >= 0
     constraintNumber++;
     this->constraints[constraintNumber][Ay] = 1;
     this->constraints[constraintNumber][constant] = 0;
-    this->desigualdades[constraintNumber] = ">=";
+    this->inequalities[constraintNumber] = ">=";
     constraintNumber++;
     this->constraints[constraintNumber][Ay] = 1;
     this->constraints[constraintNumber][constant] = this->m-1;
-    this->desigualdades[constraintNumber] = "<=";
+    this->inequalities[constraintNumber] = "<=";
 
     //Dx >= 0; Dy >= 0
     constraintNumber++;
     this->constraints[constraintNumber][Dx] = 1;
     this->constraints[constraintNumber][constant] = 0;
-    this->desigualdades[constraintNumber] = ">=";
+    this->inequalities[constraintNumber] = ">=";
     constraintNumber++;
     this->constraints[constraintNumber][Dy] = 1;
     this->constraints[constraintNumber][constant] = 0;
-    this->desigualdades[constraintNumber] = ">=";
+    this->inequalities[constraintNumber] = ">=";
 
     //Dxi >= 0; Dyi >=0;
     for(int i=0;i<n;i++)
@@ -225,11 +242,11 @@ void ConstraintsManager::buildContraints()
         constraintNumber++;
         this->constraints[constraintNumber][Dxi+i] = 1;
         this->constraints[constraintNumber][constant] = 0;
-        this->desigualdades[constraintNumber] = ">=";
+        this->inequalities[constraintNumber] = ">=";
         constraintNumber++;
         this->constraints[constraintNumber][Dyi+i] = 1;
         this->constraints[constraintNumber][constant] = 0;
-        this->desigualdades[constraintNumber] = ">=";
+        this->inequalities[constraintNumber] = ">=";
     }
 
     // 1 >= Sxi >= 0; 1 >= Syi >= 0; 1 >= ci >= 0
@@ -238,27 +255,27 @@ void ConstraintsManager::buildContraints()
         constraintNumber++;
         this->constraints[constraintNumber][Sxi+i] = 1;
         this->constraints[constraintNumber][constant] = 0;
-        this->desigualdades[constraintNumber] = ">=";
+        this->inequalities[constraintNumber] = ">=";
         constraintNumber++;
         this->constraints[constraintNumber][Sxi+i] = 1;
         this->constraints[constraintNumber][constant] = 1;
-        this->desigualdades[constraintNumber] = "<=";
+        this->inequalities[constraintNumber] = "<=";
         constraintNumber++;
         this->constraints[constraintNumber][Syi+i] = 1;
         this->constraints[constraintNumber][constant] = 0;
-        this->desigualdades[constraintNumber] = ">=";
+        this->inequalities[constraintNumber] = ">=";
         constraintNumber++;
         this->constraints[constraintNumber][Syi+i] = 1;
         this->constraints[constraintNumber][constant] = 1;
-        this->desigualdades[constraintNumber] = "<=";
+        this->inequalities[constraintNumber] = "<=";
         constraintNumber++;
         this->constraints[constraintNumber][ci+i] = 1;
         this->constraints[constraintNumber][constant] = 0;
-        this->desigualdades[constraintNumber] = ">=";
+        this->inequalities[constraintNumber] = ">=";
         constraintNumber++;
         this->constraints[constraintNumber][ci+i] = 1;
         this->constraints[constraintNumber][constant] = 1;
-        this->desigualdades[constraintNumber] = "<=";
+        this->inequalities[constraintNumber] = "<=";
     }
 }
 
@@ -268,13 +285,13 @@ void ConstraintsManager::setConstraints(lprec *lp)
 
     for(int i=0;i<this->amountConstraints-1;i++)
     {
-        if (this->desigualdades[i] == ">=")
+        if (this->inequalities[i] == ">=")
         {
             add_constraintex(lp,this->amountVariables-1,this->constraints[i],this->columnNumber,GE,this->constraints[i][this->amountVariables-1]);
-        }else if(this->desigualdades[i] == "<=")
+        }else if(this->inequalities[i] == "<=")
         {
             add_constraintex(lp,this->amountVariables-1,this->constraints[i],this->columnNumber,LE,this->constraints[i][this->amountVariables-1]);
-        }else if(this->desigualdades[i] == "=")
+        }else if(this->inequalities[i] == "=")
         {
             add_constraintex(lp,this->amountVariables-1,this->constraints[i],this->columnNumber,EQ,this->constraints[i][this->amountVariables-1]);
         }

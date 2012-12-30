@@ -16,14 +16,16 @@ SOURCES += main.cpp\
     board.cpp \
     city.cpp \
     constraintsmanager.cpp \
-    solver.cpp
+    solver.cpp \
+    branchandbound.cpp
 
 HEADERS  += mainwindow.h \
     canvas.h \
     board.h \
     city.h \
     constraintsmanager.h \
-    solver.h
+    solver.h \
+    branchandbound.h
 
 RESOURCES += \
     resources.qrc

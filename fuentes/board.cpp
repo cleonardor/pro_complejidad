@@ -37,7 +37,19 @@ Board::Board(QWidget *parent)
 }
 
 Board::~Board()
-{}
+{
+    delete this->loadFileButton;
+    delete this->seeFileButton;
+    delete this->runButton;
+    delete this->textEdit;
+
+    this->loadFileButton = 0;
+    this->seeFileButton = 0;
+    this->runButton = 0;
+    this->textEdit = 0;
+
+    this->clearCities();
+}
 
 void Board::loadFileSlot()
 {

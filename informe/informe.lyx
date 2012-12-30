@@ -491,7 +491,7 @@ Restricciones obvias:
 
 \begin_deeper
 \begin_layout Itemize
-\begin_inset Formula $0\leq posx\,,\, posy\leq N$
+\begin_inset Formula $0\leq posx\,,\, posy\leq N-1$
 \end_inset
 
 
