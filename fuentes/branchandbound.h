@@ -2,15 +2,16 @@
 #define BRANCHANDBOUND_H
 
 #include "lp_lib.h"
+#include "solution.h"
 #include <QStack>
 
 class BranchAndBound
 {
 private:
-    double zMax, xMax, yMax;
     lprec *lp;
     QStack<lprec*> stack;
-    int n;
+    int n;//cantidad de ciudades
+    Solution *solution;
 
     bool isBin(double a);
 
@@ -19,6 +20,7 @@ public:
     ~BranchAndBound();
 
     void findSolution();
+    Solution* getSolution();
 };
 
 #endif // BRANCHANDBOUND_H

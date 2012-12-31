@@ -1,27 +1,33 @@
 #include "branchandbound.h"
-
-#include <iostream>
-using namespace std;
+#include <math.h>
+#include <QString>
 
 BranchAndBound::BranchAndBound(lprec *lp, int n)
 {
     this->lp = lp;
-    this->zMax = -1;
-    this->xMax = -1;
-    this->yMax = -1;
     this->n = n;
+
+    this->solution = new Solution();
+    this->solution->setN(n);
+    this->solution->setAmountVariables(get_Ncolumns(this->lp));
 }
 
 BranchAndBound::~BranchAndBound()
 {
+    delete this->solution;
+    this->solution = 0;
 
+    //lp a cambiado al objeto que apunta en la ejecución, y ha sido eliminado. El objeto original pretenece a Solver, ella se encarga
 }
 
 
 void BranchAndBound::findSolution()
 {
     double *result = new double[get_Ncolumns(this->lp)];
-    int Sxi=2*n, Syi=3*n, ci=4*n, Ax=5*n+2, Ay=5*n+3, state;
+    double *row = new double[1];
+    int *columnNumber = new int[1];
+    int state;
+    bool isIntSolution;
 
     this->stack.push(copy_lp(this->lp));
 
@@ -31,25 +37,71 @@ void BranchAndBound::findSolution()
 
         set_verbose(this->lp, IMPORTANT);//para que se vean mensages importantes mientras se resuelve
         state = solve(this->lp);
-        //ver que el resultado sea satisfactible, de lo contrario terminar
-        //si es satisfactible ver si las variables son binarias, si todas lo son se encontro una solucion factible
-        //ver si esta es mejor que la minima, si no lo es dar por terminado
-        get_variables(this->lp,result);
 
-        for(int i=2*n;i<4*n+n;i++)
+        if(state == INFEASIBLE)
         {
-            cout << "is bin " << get_col_name(this->lp, i+1) << " : " << this->isBin(result[i]) << endl;
+            delete_lp(this->lp);
+            this->lp = 0;
+            continue;
+        }else if(floor(get_objective(this->lp)) <= this->solution->getZmax())
+        {
+            delete_lp(this->lp);
+            this->lp = 0;
+            continue;
+        }else
+        {
+            get_variables(this->lp,result);
+
+            for(int i=2*n;i<4*n+n;i++)
+            {
+                if(!this->isBin(result[i]))
+                {                    
+                    lprec *lp1 = copy_lp(this->lp);
+                    lprec *lp2 = copy_lp(this->lp);
+
+                    columnNumber[0] = i+1;
+                    row[0] = 1;
+
+                    add_constraintex(lp1,1,row,columnNumber,LE,floor(result[i]));
+                    add_constraintex(lp2,1,row,columnNumber,GE,ceil(result[i]));
+
+                    this->stack.push(lp2);
+                    this->stack.push(lp1);
+
+                    //write_lp(lp1,QString("model-").append(get_col_name(lp,i+1)).append("-1.lp").toAscii().data());
+                    //write_lp(lp2,QString("model-").append(get_col_name(lp,i+1)).append("-2.lp").toAscii().data());
+
+                    isIntSolution = false;
+                    break;
+                }
+                isIntSolution = true;
+            }
+
+            if(isIntSolution)
+            {
+                if(get_objective(this->lp) > this->solution->getZmax())
+                {
+                    this->solution->setZmax(get_objective(this->lp));
+                    this->solution->setResult(result);
+                }
+            }
         }
+        delete_lp(this->lp);
+        this->lp = 0;
     }
 }
 
 bool BranchAndBound::isBin(double a)
 {
-    if(a == 0 || a == 1)
+    if(a == 0.0 || a == 1.0)
     {
         return true;
     }else{
-        return false;
+        return (1-a < 0.000001 || a < 0.000001);
     }
+}
 
+Solution* BranchAndBound::getSolution()
+{
+    return this->solution;
 }

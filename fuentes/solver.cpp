@@ -1,23 +1,26 @@
 #include "solver.h"
-#include <iostream>
-using namespace std;
+#include <QStringList>
 
 Solver::Solver(int m, QVector<City *> *cities)
 {
     this->n = cities->size();
-    //this->cities = cities;//creo que estos dos atributos no son necesarios
     this->constrainsManager = new ConstraintsManager(m,cities);
-    lp = 0;
-    bb = 0;
+    this->lp = 0;
+    this->bb = 0;
+    this->solution = 0;
 }
 
 Solver::~Solver()
 {
     delete this->constrainsManager;
     delete this->lp;
+    delete this->bb;
+    //delete this->solution;//este puntero apunta a un objeto en BranchAndBoud, ella es la encargada de eliminarlo
 
     this->constrainsManager = 0;
     this->lp = 0;
+    this->bb = 0;
+    this->solution = 0;
 }
 
 void Solver::findSolution()
@@ -33,42 +36,17 @@ void Solver::findSolution()
 
     this->bb = new BranchAndBound(this->lp,this->n);
     this->bb->findSolution();
-
-    /*int n = get_Ncolumns(this->lp);
-    double *result = new double[n];
-
-    set_verbose(this->lp, IMPORTANT);//para que se vean mensages importantes mientras se resuelve
-    int state = solve(lp);
-    get_variables(this->lp,result);
-
-    cout << "estado: " << state << endl;
-    cout << "valor objetivo: " << get_objective(this->lp) << endl;
-    for(int i=0;i<n;i++)
+    this->solution = this->bb->getSolution();
+    QStringList nameVariables;
+    for(int i=0;i<this->solution->getAmountVariables();i++)
     {
-        cout << get_col_name(this->lp, i+1) << ": " << result[i] << endl;
+        nameVariables.append(QString(get_col_name(this->lp,i+1)));
     }
-*/
-
+    this->solution->setNameVariables(nameVariables);
+    //this->solution->printResult();
 }
 
-
-/*void Solver::setN(int n)
+Solution* Solver::getSolution()
 {
-    this->n = n;
+    return this->solution;
 }
-
-void Solver::setCities(QVector<City *> *cities)
-{
-    this->cities = cities;
-}
-
-int Solver::getN()
-{
-    return this->n;
-}
-
-QVector<City *>* Solver::getCities()
-{
-    return this->cities;
-}
-*/

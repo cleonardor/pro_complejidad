@@ -2,10 +2,12 @@
 #define BOARD_H
 
 #include <QWidget>
+
 QT_BEGIN_NAMESPACE
 class QPushButton;
 class City;
-class QPlainTextEdit;
+class QTextEdit;
+class Solution;
 QT_END_NAMESPACE
 
 class Board : public QWidget
@@ -20,15 +22,17 @@ public:
     int getAmountCities();
     QVector<City *>* getCitiesRef();
 
+    void setResult(Solution *solution);
+
 private:
     int m;
     int amountCities;
     QVector<City *> cities;
 
     QPushButton *loadFileButton;
-    QPushButton *seeFileButton;
+    //QPushButton *seeFileButton;
     QPushButton *runButton;
-    QPlainTextEdit *textEdit;
+    QTextEdit *textEdit;
 
     void clearCities();
 

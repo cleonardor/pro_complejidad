@@ -2,16 +2,13 @@
 #include <QFile>
 #include <QTextStream>
 
-#include <iostream>
-using namespace std;
-
 ConstraintsManager::ConstraintsManager(int m, QVector<City *> *cities)
 {
     this->m = m;
     this->cities = cities;
     this->amountConstraints = 11 + 17*cities->size() + 1;//1 porque se usa la última fila para la función objetivo
     this->amountVariables = 4 + 5*cities->size() + 1;//1 porque se usa para rhs, en realidad no es una variable
-    this->inequalities = new string[this->amountConstraints-1];
+    this->inequalities = new std::string[this->amountConstraints-1];
     this->columnNumber = new int[this->amountVariables-1];
     this->constraints = new double*[this->amountConstraints];
     for(int i=0;i<this->amountConstraints;i++)
@@ -41,7 +38,7 @@ ConstraintsManager::~ConstraintsManager()
         this->constraints[i] = 0;
     }
     delete this->constraints;
-    //delete inequalities; si hago esto muere por un motivo que desconozco
+    //delete inequalities; si hago esto muere por algún motivo que desconozco
     delete columnNumber;
 
     this->constraints = 0;

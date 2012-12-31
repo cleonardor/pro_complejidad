@@ -2,6 +2,7 @@
 #include "canvas.h"
 #include "board.h"
 #include "solver.h"
+#include "solution.h"
 #include <QTextCodec>
 #include <QHBoxLayout>
 #include <QGraphicsView>
@@ -52,6 +53,11 @@ void MainWindow::loadFileDoneSlot()
 
 void MainWindow::runSlot()
 {
+    delete this->solver;
     this->solver = new Solver(this->board->getM(),this->board->getCitiesRef());
     this->solver->findSolution();
+    Solution *solution = this->solver->getSolution();
+    this->board->setResult(solution);
+    this->canvas->drawResult(solution,this->board->getCitiesRef(),this->board->getM());
+    solution = 0;
 }

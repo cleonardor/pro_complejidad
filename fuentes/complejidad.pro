@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     city.cpp \
     constraintsmanager.cpp \
     solver.cpp \
-    branchandbound.cpp
+    branchandbound.cpp \
+    solution.cpp
 
 HEADERS  += mainwindow.h \
     canvas.h \
@@ -25,7 +26,8 @@ HEADERS  += mainwindow.h \
     city.h \
     constraintsmanager.h \
     solver.h \
-    branchandbound.h
+    branchandbound.h \
+    solution.h
 
 RESOURCES += \
     resources.qrc

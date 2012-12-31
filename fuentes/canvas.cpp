@@ -1,10 +1,14 @@
 #include "canvas.h"
 #include "city.h"
+#include "solution.h"
 #include <QGraphicsLineItem>
 #include <QPen>
 #include <QPixmap>
-#include <QGraphicsItem>
+#include <QGraphicsEllipseItem>
+#include <QPen>
 
+#include <iostream>
+using namespace std;
 Canvas::Canvas(QObject *parent)
     :QGraphicsScene(parent)
 {
@@ -14,7 +18,7 @@ Canvas::~Canvas()
 {}
 
 /*
- n: tamaño del tablero
+ m: tamaño del tablero
 */
 void Canvas::drawState(int m, QVector<City *> *cities)
 {
@@ -50,4 +54,33 @@ void Canvas::drawState(int m, QVector<City *> *cities)
         item->setPos(c->getCoorX()*dx,(m-c->getCoorY()-1)*dy);
         addItem(item);
     }
+}
+
+void Canvas::drawResult(Solution *solution, QVector<City *> *cities, int m)
+{
+    double dx = width()/m;
+    double dy = height()/m;
+
+    QVector<double> result = solution->getResult();
+    double Ax = result.at(result.size()-2);
+    double Ay = result.at(result.size()-1);
+
+    /*dibujar basurero*/
+    QPixmap pix(":/images/recycle.jpeg");
+    QGraphicsPixmapItem *item = new QGraphicsPixmapItem(pix.scaled(dx,dy));
+    item->setPos(Ax*dx,(m-Ay-1)*dy);
+    addItem(item);
+
+    int nearbyCity = solution->getNearbyCity();
+    City *c = cities->at(nearbyCity);
+    QGraphicsEllipseItem *item2 = new QGraphicsEllipseItem(0,0,dx,dy);
+    item2->setPos(QPointF(c->getCoorX()*dx,(m-c->getCoorY()-1)*dy));
+
+    QPen pen;
+    pen.setWidth(4);
+    pen.setStyle(Qt::DashDotLine);
+    pen.setColor(Qt::blue);
+    item2->setPen(pen);
+
+    addItem(item2);
 }

@@ -2,11 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QtGui/QMainWindow>
-#include "solver.h"
 
 QT_BEGIN_NAMESPACE
 class Canvas;
 class Board;
+class Solver;
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow

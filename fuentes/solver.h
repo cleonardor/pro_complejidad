@@ -4,6 +4,7 @@
 #include "city.h"
 #include "constraintsmanager.h"
 #include "branchandbound.h"
+#include "solution.h"
 #include "lp_lib.h"
 #include <QVector>
 
@@ -11,21 +12,17 @@ class Solver
 {
 private:
     int n;// cantidad de ciudades
-    //QVector<City *> *cities;
     ConstraintsManager *constrainsManager;
     BranchAndBound *bb;
     lprec *lp;
+    Solution *solution;
+
 public:
     Solver(int m=0, QVector<City *> *cities=0);
     ~Solver();
 
     void findSolution();
-
-    /*void setN(int n);
-    void setCities(QVector<City *> *cities);
-    int getN();
-    QVector<City *>* getCities();*/
-
+    Solution* getSolution();
 };
 
 #endif // SOLVER_H
