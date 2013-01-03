@@ -390,7 +390,7 @@ La función objetivo corresponde a maximizar la distancia entre el basurero
  y la ciudad más cercana:
 \begin_inset Formula 
 \[
-max\, z=absx+absy
+max\, z=Dx+Dy
 \]
 
 \end_inset
@@ -418,7 +418,7 @@ Variables
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $absx$
+\begin_inset Formula $Dx$
 \end_inset
 
 , corresponde a la distancia en 
@@ -429,7 +429,7 @@ Variables
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $absy$
+\begin_inset Formula $Dy$
 \end_inset
 
 , corresponde a la distancia en 
@@ -440,7 +440,7 @@ Variables
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $posx$
+\begin_inset Formula $Ax$
 \end_inset
 
 , indica la posición en 
@@ -451,7 +451,7 @@ Variables
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $posy$
+\begin_inset Formula $Ay$
 \end_inset
 
 , indica la posición en 
@@ -462,7 +462,7 @@ Variables
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $absx_{i}$
+\begin_inset Formula $Dx_{i}$
 \end_inset
 
 , corresponde a la distancia en 
@@ -477,7 +477,7 @@ Variables
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $absy_{i}$
+\begin_inset Formula $Dy_{i}$
 \end_inset
 
 , corresponde a la distancia en 
@@ -492,7 +492,7 @@ Variables
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $posx_{i}$
+\begin_inset Formula $Cx_{i}$
 \end_inset
 
 , indica la posición en 
@@ -507,7 +507,7 @@ Variables
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $posy_{i}$
+\begin_inset Formula $Cy_{i}$
 \end_inset
 
 , indica la posición en 
@@ -604,7 +604,7 @@ name "enu:rest1"
 \end_inset
 
 
-\begin_inset Formula $absx_{i}=\left|posx-posx_{i}\right|$
+\begin_inset Formula $Dx_{i}=\left|Ax-Cx_{i}\right|$
 \end_inset
 
 , para ello se hace uso de las siguientes restricciones:
@@ -612,14 +612,14 @@ name "enu:rest1"
 
 \begin_deeper
 \begin_layout Enumerate
-\begin_inset Formula $absx_{i}\leq posx-posx_{i}+w(1-Sx_{i})$
+\begin_inset Formula $Dx_{i}\leq Cx_{i}-Ax+w(1-Sx_{i})$
 \end_inset
 
  
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset Formula $absx_{i}\leq posx-posx_{i}+w(Sx_{i})$
+\begin_inset Formula $Dx_{i}\leq Ax-Cx_{i}+w(Sx_{i})$
 \end_inset
 
 
@@ -628,7 +628,7 @@ name "enu:rest1"
 \begin_deeper
 \begin_layout Standard
 Las cuales hacen que 
-\begin_inset Formula $absx_{i}\leq\left|posx-posx_{i}\right|$
+\begin_inset Formula $Dx_{i}\leq\left|Ax-Cx_{i}\right|$
 \end_inset
 
 .
@@ -640,14 +640,14 @@ Las cuales hacen que
 
 \end_deeper
 \begin_layout Enumerate
-\begin_inset Formula $absx_{i}\geq posx-posx_{i}$
+\begin_inset Formula $Dx_{i}\geq Ax-Cx_{i}$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset Formula $absx_{i}\geq posx_{i}-posx$
+\begin_inset Formula $Dx_{i}\geq Cx_{i}-Ax$
 \end_inset
 
 ,
@@ -656,7 +656,7 @@ Las cuales hacen que
 \begin_deeper
 \begin_layout Standard
 Las cuales hacen que 
-\begin_inset Formula $absx_{i}\geq\left|posx-posx_{i}\right|$
+\begin_inset Formula $Dx_{i}\geq\left|Ax-Cx_{i}\right|$
 \end_inset
 
 
@@ -672,7 +672,7 @@ name "enu:rest2"
 \end_inset
 
 
-\begin_inset Formula $absy_{i}=\left|posy-posy_{i}\right|$
+\begin_inset Formula $Dy_{i}=\left|Ay-Cy_{i}\right|$
 \end_inset
 
 , para ello se hace uso de las siguientes restricciones:
@@ -680,14 +680,14 @@ name "enu:rest2"
 
 \begin_deeper
 \begin_layout Enumerate
-\begin_inset Formula $absy_{i}\leq posy-posy_{i}+w(1-Sy_{i})$
+\begin_inset Formula $Dy_{i}\leq Cy_{i}-Ay+w(1-Sy_{i})$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset Formula $absy_{i}\leq posy-posy_{i}+w(Sy_{i})$
+\begin_inset Formula $Dy_{i}\leq Ay-Cy_{i}+w(Sy_{i})$
 \end_inset
 
 
@@ -696,7 +696,7 @@ name "enu:rest2"
 \begin_deeper
 \begin_layout Standard
 Las cuales hacen que 
-\begin_inset Formula $absy_{i}\leq\left|posy-posy_{i}\right|$
+\begin_inset Formula $Dy_{i}\leq\left|Ay-Cy_{i}\right|$
 \end_inset
 
 .
@@ -708,14 +708,14 @@ Las cuales hacen que
 
 \end_deeper
 \begin_layout Enumerate
-\begin_inset Formula $absy_{i}\geq posy-posy_{i}$
+\begin_inset Formula $Dy_{i}\geq Ay-Cy_{i}$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset Formula $absy_{i}\geq posy_{i}-posy$
+\begin_inset Formula $Dy_{i}\geq Cy_{i}-Ay$
 \end_inset
 
 
@@ -724,7 +724,7 @@ Las cuales hacen que
 \begin_deeper
 \begin_layout Standard
 Las cuales hacen que 
-\begin_inset Formula $absy_{i}\geq\left|posy-posy_{i}\right|$
+\begin_inset Formula $Dy_{i}\geq\left|Ay-Cy_{i}\right|$
 \end_inset
 
 .
@@ -754,7 +754,7 @@ name "enu:absx"
 \end_inset
 
 
-\begin_inset Formula $absx=\left|posx-\sum posx_{i}\cdot C_{i}\right|$
+\begin_inset Formula $Dx=\left|Ax-\sum Cx_{i}\cdot C_{i}\right|$
 \end_inset
 
 , para ello se hace uso de las siguientes restricciones:
@@ -762,14 +762,14 @@ name "enu:absx"
 
 \begin_deeper
 \begin_layout Enumerate
-\begin_inset Formula $absx\geq posx-\sum posx\cdot C_{i}$
+\begin_inset Formula $Dx\geq Ax-\sum Cx_{i}\cdot C_{i}$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset Formula $absx\geq\sum posx\cdot C_{i}-posx$
+\begin_inset Formula $Dx\geq\sum Cx_{i}\cdot C_{i}-Ax$
 \end_inset
 
 
@@ -778,7 +778,7 @@ name "enu:absx"
 \begin_deeper
 \begin_layout Standard
 De manera que 
-\begin_inset Formula $absx$
+\begin_inset Formula $Dx$
 \end_inset
 
  sea mayor o igual a la distancia en 
@@ -798,7 +798,7 @@ name "enu:absy"
 \end_inset
 
 
-\begin_inset Formula $absxy=\left|posy-\sum posy_{i}\cdot C_{i}\right|$
+\begin_inset Formula $Dy=\left|Ay-\sum Cy_{i}\cdot C_{i}\right|$
 \end_inset
 
 , para ello se hace uso de las siguientes restricciones:
@@ -806,14 +806,14 @@ name "enu:absy"
 
 \begin_deeper
 \begin_layout Enumerate
-\begin_inset Formula $absy\geq posy-\sum posy_{i}\cdot C_{i}$
+\begin_inset Formula $Dy\geq Ay-\sum Cy_{i}\cdot C_{i}$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset Formula $absy\geq\sum posy\cdot C_{i}-posy$
+\begin_inset Formula $Dy\geq\sum Cy_{i}\cdot C_{i}-Ay$
 \end_inset
 
 
@@ -822,7 +822,7 @@ name "enu:absy"
 \begin_deeper
 \begin_layout Standard
 De manera que 
-\begin_inset Formula $absy$
+\begin_inset Formula $Dy$
 \end_inset
 
  sea mayor o igual a la distancia en 
@@ -842,11 +842,11 @@ name "enu:abs<absi"
 \end_inset
 
 
-\begin_inset Formula $absx+absy\leq absx_{i}+absy_{i}$
+\begin_inset Formula $Dx+Dy\leq Dx_{i}+Dy_{i}$
 \end_inset
 
 , la cual hace que la 
-\begin_inset Formula $absx+absy$
+\begin_inset Formula $Dx+Dy$
 \end_inset
 
  sea menor o igual a la suma de las distancias en 
@@ -866,14 +866,14 @@ Restricciones obvias:
 
 \begin_deeper
 \begin_layout Itemize
-\begin_inset Formula $0\leq posx\,,\, posy\leq N$
+\begin_inset Formula $0\leq Ax\,,\, Ay\leq N$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $absx\,,\, absy\geq0$
+\begin_inset Formula $Dx\,,\, Dy\geq0$
 \end_inset
 
 
@@ -885,11 +885,16 @@ Justificación
 \end_layout
 
 \begin_layout Standard
-La estrategia seguida consistió en maximizar la distancia del basurero a
- la ciudad más cercana.
- Esto se logró estableciendo la distancia de cada ciudad al basurero, para
- posteriormente maximizar la menor de esas distancias, asignando dicho valor
- a las variables de la función objetivo.
+Para solucionar el problema presentado en este informe se creo un modelo
+ con varias restricciones las cuales son necesarias para representar el
+ valor absoluto correspondiente a la distancia entre las ciudades y el basurero.
+ Estas restricciones además permiten determinar cual es la ciudad mas cercana
+ al basurero con respecto a las demás, para ello se crean variables auxiliares
+ para cada ciudad entre cero y uno, donde la ciudad mas cercana es uno o
+ muy cercano a uno, y las más lejanas son cero o muy cercano a cero.
+ Una vez identificada la menor distancia entre las ciudades y el basurero
+ se procede a maximizar dicha distancia, asignando este valor a las variables
+ de la función objetivo.
 \end_layout
 
 \begin_layout Standard
@@ -1050,8 +1055,15 @@ Lo mas importante al momento de solucionar el problema es tener un modelo
 \end_layout
 
 \begin_layout Itemize
-Es muy importante estar muy seguros del modelo antes de implementar, pues
- un error en el mismo lleva a largas etapas de depuración y confusión.
+Es muy importante haber probado el modelo antes de implementarlo, pues un
+ error en el mismo lleva a largas etapas de depuración y confusión.
+\end_layout
+
+\begin_layout Itemize
+Al comparar los resultados obtenidos de la aplicación creada con los resultados
+ obtenidos con el lpsolve, pudimos observar que los resultados de las variables
+ básicas y z-optimos son correctos, a pesar de que la ubicación para el
+ basurero seleccionada por los programas no sea la misma.
 \end_layout
 
 \begin_layout Standard
