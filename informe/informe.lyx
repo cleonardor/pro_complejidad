@@ -26,7 +26,16 @@
 \index_command default
 \paperfontsize default
 \spacing single
-\use_hyperref false
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
 \papersize default
 \use_geometry true
 \use_amsmath 1
@@ -64,35 +73,279 @@
 
 \begin_body
 
-\begin_layout Title
+\begin_layout Standard
 
-\series bold
-\size larger
-Complejidad y Optimización
-\begin_inset Newline newline
-\end_inset
+\lang english
+\begin_inset ERT
+status open
 
-Informe Proyecto de Curso
+\begin_layout Plain Layout
+
+
+\backslash
+newcommand
+\backslash
+portada{ 
 \end_layout
 
-\begin_layout Author
-Yerminson Doney Gonzalez Muñoz, código 08
-\begin_inset Newline newline
-\end_inset
+\begin_layout Plain Layout
 
-Edwin Fernando Muñoz Delgado, código 0
-\begin_inset Newline newline
-\end_inset
 
-Cristian Leonardo Ríos, código 08
-\begin_inset Newline newline
-\end_inset
-
-Erika Suarez Valencia, código 0743588
+\backslash
+begin{titlepage} 		
 \end_layout
 
-\begin_layout Date
-Diciembre 5 de 2012
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center} 			
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+large 
+\backslash
+bf COMPLEJIDAD Y OPTIMIZACIÓN 
+\backslash
+par}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+large 
+\backslash
+bf Informe Proyecto de Curso}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+vfill
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+large
+\backslash
+bf PRESENTADO POR 
+\backslash
+par}
+\end_layout
+
+\begin_layout Plain Layout
+
+			{
+\backslash
+large
+\backslash
+bf Yerminson Doney Gonzalez Muñoz, código 0843846 
+\backslash
+par}
+\end_layout
+
+\begin_layout Plain Layout
+
+			{
+\backslash
+large
+\backslash
+bf Edwin Fernando Muñoz Delgado, código 0910398 
+\backslash
+par}
+\end_layout
+
+\begin_layout Plain Layout
+
+			{
+\backslash
+large
+\backslash
+bf Crsitian Leonardo Ríos López, código 0842139 
+\backslash
+par}
+\end_layout
+
+\begin_layout Plain Layout
+
+			{
+\backslash
+large
+\backslash
+bf Erika Suárez Valencia, código 0743588 
+\backslash
+par}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+vfill
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+large
+\backslash
+bf PRESENTADO A 
+\backslash
+par}
+\end_layout
+
+\begin_layout Plain Layout
+
+			{
+\backslash
+large
+\backslash
+bf Jesús Alexander Aranda 
+\backslash
+par} 			
+\end_layout
+
+\begin_layout Plain Layout
+
+			{
+\backslash
+large
+\backslash
+bf Irene Tischer 
+\backslash
+par}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+vfill 	
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+large
+\backslash
+bf Facultad de Ingeniería 
+\backslash
+par} 		
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+large
+\backslash
+bf Escuela de Ingeniería de Sistemas y Computación  
+\backslash
+par} 	
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+large
+\backslash
+bf Programa Académico de Ingeniería de Sistemas 
+\backslash
+par} 
+\end_layout
+
+\begin_layout Plain Layout
+
+			
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+large
+\backslash
+bf Ssntiago de Cali, Enero 4 de 2013 
+\backslash
+par} 
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{titlepage} 
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+portada
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand
+\backslash
+contentsname{
+\backslash
+centering Tabla de Contenido}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{tocdepth}{2}
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+tableofcontents
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+clearpage
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -100,16 +353,22 @@ Problema
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-Descripción del problema?
+La región EcoReg tiene un problema serio de depósito de basuras, y ha decidido
+ construir un nuevo relleno dentro de sus fronteras.
+ Como es natural, cada ciudad dentro de la región está en alerta y presionando
+ para que el sitio no quede cerca de su ciudad.
+ Por tal razón, los administradores de la región quieren encontrar un sitio
+ que quede lo más lejos posible de la ciudad más cercana.
+ Los administradores han decidido medir la distancia entre dos ciudades
+ con la métrica Manhattan la cual define la distancia entre dos puntos como
+ la distancia en el eje X más la distancia en el eje Y.
 \end_layout
 
-\end_inset
-
-
+\begin_layout Standard
+La región se representa como un cuadrado perfecto de N km por N km.
+ Denotamos la esquina al suroccidente de la región con la posición (0,0).
+ En este sistema, las ciudades están situadas sobre las intersecciones.
+ 
 \end_layout
 
 \begin_layout Section
@@ -127,7 +386,13 @@ Función objetivo
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $máximizar\, z=absx+absy$
+La función objetivo corresponde a maximizar la distancia entre el basurero
+ y la ciudad más cercana:
+\begin_inset Formula 
+\[
+max\, z=absx+absy
+\]
+
 \end_inset
 
 
@@ -149,17 +414,7 @@ Variables
 \begin_inset Formula $N$
 \end_inset
 
- es igual al largo de la región.
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-Esto no es una variable, pero igual debería ir aqui?
-\end_layout
-
-\end_inset
-
-
+ es igual al largo de la región EcoReg.
 \end_layout
 
 \begin_layout Itemize
@@ -170,7 +425,7 @@ Esto no es una variable, pero igual debería ir aqui?
 \begin_inset Formula $x$
 \end_inset
 
- entre el basurero y la ciudad mas cercana.
+ entre el basurero y la ciudad más cercana.
 \end_layout
 
 \begin_layout Itemize
@@ -181,7 +436,7 @@ Esto no es una variable, pero igual debería ir aqui?
 \begin_inset Formula $y$
 \end_inset
 
- entre el basurero y la ciudad mas cercana.
+ entre el basurero y la ciudad más cercana.
 \end_layout
 
 \begin_layout Itemize
@@ -267,6 +522,13 @@ Esto no es una variable, pero igual debería ir aqui?
 \end_layout
 
 \begin_layout Itemize
+\begin_inset CommandInset label
+LatexCommand label
+name "sx"
+
+\end_inset
+
+
 \begin_inset Formula $Sx_{i}$
 \end_inset
 
@@ -276,20 +538,28 @@ Esto no es una variable, pero igual debería ir aqui?
 \end_inset
 
 .
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-Colocar aquí? los valores que toma en cada caso, no está implementado como
- restricción, por ello no debería ir en las restricciones
 \end_layout
 
+\begin_deeper
+\begin_layout Standard
+\begin_inset Formula $Sx_{i}=\begin{cases}
+1 & posx_{i}>posx\\
+0 & posx_{i}\leq posx
+\end{cases}$
 \end_inset
 
 
 \end_layout
 
+\end_deeper
 \begin_layout Itemize
+\begin_inset CommandInset label
+LatexCommand label
+name "sy"
+
+\end_inset
+
+
 \begin_inset Formula $Sy_{i}$
 \end_inset
 
@@ -298,19 +568,20 @@ Colocar aquí? los valores que toma en cada caso, no está implementado como
 \end_inset
 
 .
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-Colocar aquí? los valores que toma en cada caso, no está implementado como
- restricción, por ello no debería ir en las restricciones
 \end_layout
 
+\begin_deeper
+\begin_layout Standard
+\begin_inset Formula $Sy_{i}=\begin{cases}
+1 & posy_{i}>posy\\
+0 & posy_{i}\leq posy
+\end{cases}$
 \end_inset
 
 
 \end_layout
 
+\end_deeper
 \begin_layout Itemize
 \begin_inset Formula $C_{i}=\begin{cases}
 1 & Si\, la\, ciudad\, i\, es\, la\, mas\, cercana\, al\, basurero\\
@@ -325,7 +596,14 @@ Colocar aquí? los valores que toma en cada caso, no está implementado como
 Restricciones
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:rest1"
+
+\end_inset
+
+
 \begin_inset Formula $absx_{i}=\left|posx-posx_{i}\right|$
 \end_inset
 
@@ -333,30 +611,51 @@ Restricciones
 \end_layout
 
 \begin_deeper
-\begin_layout Standard
+\begin_layout Enumerate
 \begin_inset Formula $absx_{i}\leq posx-posx_{i}+w(1-Sx_{i})$
 \end_inset
 
- y 
-\begin_inset Formula $absx_{i}\leq posx-posx_{i}+w(Sx_{i})$
-\end_inset
+ 
+\end_layout
 
-, las cuales hacen que 
-\begin_inset Formula $absx_{i}\leq\left|posx-posx_{i}\right|$
+\begin_layout Enumerate
+\begin_inset Formula $absx_{i}\leq posx-posx_{i}+w(Sx_{i})$
 \end_inset
 
 
 \end_layout
 
+\begin_deeper
 \begin_layout Standard
+Las cuales hacen que 
+\begin_inset Formula $absx_{i}\leq\left|posx-posx_{i}\right|$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
 \begin_inset Formula $absx_{i}\geq posx-posx_{i}$
 \end_inset
 
- y 
+
+\end_layout
+
+\begin_layout Enumerate
 \begin_inset Formula $absx_{i}\geq posx_{i}-posx$
 \end_inset
 
-, las cuales hacen que 
+,
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Las cuales hacen que 
 \begin_inset Formula $absx_{i}\geq\left|posx-posx_{i}\right|$
 \end_inset
 
@@ -364,7 +663,15 @@ Restricciones
 \end_layout
 
 \end_deeper
-\begin_layout Itemize
+\end_deeper
+\begin_layout Enumerate
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:rest2"
+
+\end_inset
+
+
 \begin_inset Formula $absy_{i}=\left|posy-posy_{i}\right|$
 \end_inset
 
@@ -372,45 +679,81 @@ Restricciones
 \end_layout
 
 \begin_deeper
-\begin_layout Standard
+\begin_layout Enumerate
 \begin_inset Formula $absy_{i}\leq posy-posy_{i}+w(1-Sy_{i})$
-\end_inset
-
- y 
-\begin_inset Formula $absy_{i}\leq posy-posy_{i}+w(Sy_{i})$
-\end_inset
-
-, las cuales hacen que 
-\begin_inset Formula $absy_{i}\leq\left|posy-posy_{i}\right|$
 \end_inset
 
 
 \end_layout
 
+\begin_layout Enumerate
+\begin_inset Formula $absy_{i}\leq posy-posy_{i}+w(Sy_{i})$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
 \begin_layout Standard
-\begin_inset Formula $absy_{i}\geq posy-posy_{i}$
+Las cuales hacen que 
+\begin_inset Formula $absy_{i}\leq\left|posy-posy_{i}\right|$
 \end_inset
 
- y 
-\begin_inset Formula $absy_{i}\geq posy_{i}-posy$
-\end_inset
-
-, las cuales hacen que 
-\begin_inset Formula $absy_{i}\geq\left|posy-posy_{i}\right|$
+.
+\begin_inset Newline newline
 \end_inset
 
 
 \end_layout
 
 \end_deeper
-\begin_layout Itemize
+\begin_layout Enumerate
+\begin_inset Formula $absy_{i}\geq posy-posy_{i}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $absy_{i}\geq posy_{i}-posy$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Las cuales hacen que 
+\begin_inset Formula $absy_{i}\geq\left|posy-posy_{i}\right|$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:Ci"
+
+\end_inset
+
+
 \begin_inset Formula $\sum C_{i}=1$
 \end_inset
 
-, de manera que solo una ciudad se reconozca como la mas cercana.
+, de manera que solo una ciudad se reconozca como la más cercana.
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:absx"
+
+\end_inset
+
+
 \begin_inset Formula $absx=\left|posx-\sum posx_{i}\cdot C_{i}\right|$
 \end_inset
 
@@ -418,15 +761,23 @@ Restricciones
 \end_layout
 
 \begin_deeper
-\begin_layout Standard
+\begin_layout Enumerate
 \begin_inset Formula $absx\geq posx-\sum posx\cdot C_{i}$
 \end_inset
 
- y 
+
+\end_layout
+
+\begin_layout Enumerate
 \begin_inset Formula $absx\geq\sum posx\cdot C_{i}-posx$
 \end_inset
 
-, de manera que 
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+De manera que 
 \begin_inset Formula $absx$
 \end_inset
 
@@ -434,11 +785,19 @@ Restricciones
 \begin_inset Formula $x$
 \end_inset
 
- entre el basurero y la ciudad mas cercana.
+ entre el basurero y la ciudad más cercana.
 \end_layout
 
 \end_deeper
-\begin_layout Itemize
+\end_deeper
+\begin_layout Enumerate
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:absy"
+
+\end_inset
+
+
 \begin_inset Formula $absxy=\left|posy-\sum posy_{i}\cdot C_{i}\right|$
 \end_inset
 
@@ -446,15 +805,23 @@ Restricciones
 \end_layout
 
 \begin_deeper
-\begin_layout Standard
+\begin_layout Enumerate
 \begin_inset Formula $absy\geq posy-\sum posy_{i}\cdot C_{i}$
 \end_inset
 
- y 
+
+\end_layout
+
+\begin_layout Enumerate
 \begin_inset Formula $absy\geq\sum posy\cdot C_{i}-posy$
 \end_inset
 
-, de manera que 
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+De manera que 
 \begin_inset Formula $absy$
 \end_inset
 
@@ -462,11 +829,19 @@ Restricciones
 \begin_inset Formula $y$
 \end_inset
 
- entre el basurero y la ciudad mas cercana.
+ entre el basurero y la ciudad más cercana.
 \end_layout
 
 \end_deeper
-\begin_layout Itemize
+\end_deeper
+\begin_layout Enumerate
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:abs<absi"
+
+\end_inset
+
+
 \begin_inset Formula $absx+absy\leq absx_{i}+absy_{i}$
 \end_inset
 
@@ -482,16 +857,16 @@ Restricciones
 \begin_inset Formula $y$
 \end_inset
 
- entre el basurero y la ciudad mas cercana.
+ entre el basurero y la ciudad más cercana.
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 Restricciones obvias:
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-\begin_inset Formula $0\leq posx\,,\, posy\leq N-1$
+\begin_inset Formula $0\leq posx\,,\, posy\leq N$
 \end_inset
 
 
@@ -505,20 +880,194 @@ Restricciones obvias:
 \end_layout
 
 \end_deeper
+\begin_layout Subsection
+Justificación
+\end_layout
+
+\begin_layout Standard
+La estrategia seguida consistió en maximizar la distancia del basurero a
+ la ciudad más cercana.
+ Esto se logró estableciendo la distancia de cada ciudad al basurero, para
+ posteriormente maximizar la menor de esas distancias, asignando dicho valor
+ a las variables de la función objetivo.
+\end_layout
+
+\begin_layout Standard
+El modelo presentado garantiza que el basurero será ubicado dentro de la
+ región EcoReg y que la ubicación del mismo cumple con lo descrito anteriormente.
+ Las restricciones 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:rest1"
+
+\end_inset
+
+ y 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:rest2"
+
+\end_inset
+
+ son usadas para obtener las distancias de cada ciudad al basurero.
+ Las restricción 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:Ci"
+
+\end_inset
+
+ garantiza que solo una ciudad sea seleccionada como la más cercana.
+ Las restricciones 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:absx"
+
+\end_inset
+
+ y 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:absy"
+
+\end_inset
+
+ asignan a las variables de la función objetivo la distancia del basurero
+ a la ciudad seleccionada como la más cercana.
+ La restricción 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:abs<absi"
+
+\end_inset
+
+ garantiza que la ciudad que fue seleccionada como la más cercana sí es
+ la más cercana.
+\end_layout
+
 \begin_layout Section
 Detalles de implementación
+\end_layout
+
+\begin_layout Standard
+La solución del problema fue implementada en el lenguaje C++, y siguió el
+ siguiente esquema de clases.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename clases.png
+	scale 60
+	noUnzip
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Diagrama de clases.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Simplex
+\end_layout
+
+\begin_layout Standard
+Se usó la implementación del simplex ofrecida por la librería lp_solve.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "lpsolve"
+
+\end_inset
+
+ Es utilizada por las clases BranchAndBound y ConstraintManager.
+\end_layout
+
+\begin_layout Subsection
+Branch and Bound
+\end_layout
+
+\begin_layout Standard
+La implementación realizada de Branch and Bound sigue una estrategia LIFO,
+ es decir, una busqueda por profundidad.
+ La variable a ramificar seleccionada corresponde a la primera variable
+ binaria cuyo valor encontrado por el simplex no sea entero, a ésta se le
+ aplica piso y techo para crear las nuevas ramas.
 \end_layout
 
 \begin_layout Section
 Pruebas
 \end_layout
 
+\begin_layout Standard
+<<Descripción de las pruebas realizadas>>
+\end_layout
+
 \begin_layout Section
 Análisis
 \end_layout
 
+\begin_layout Standard
+<<De los resultados de las pruebas realizadas.
+ Desarrolle y soporte su análisis utilizando los métodos apropiados (tablas,
+ gráficos, indicadores estadísticos), donde puedan apreciarse las variaciones
+ de acuerdo al tamaño y naturaleza de los datos de entrada.
+ Explique claramente el significado de sus datos y cómo se analizaron.>>
+\end_layout
+
 \begin_layout Section
 Conclusiones
+\end_layout
+
+\begin_layout Itemize
+Lo mas importante al momento de solucionar el problema es tener un modelo
+ que se ajuste lo mejor posible al mismo, ya que un modelo incorrecto o
+ poco robusto tiene como resultado soluciones incorrectas, especialmente
+ en casos que no se pueden probar manualmente.
+\end_layout
+
+\begin_layout Itemize
+Es muy importante estar muy seguros del modelo antes de implementar, pues
+ un error en el mismo lleva a largas etapas de depuración y confusión.
+\end_layout
+
+\begin_layout Standard
+<<Deben haber al menos 2 o 3 conclusiones sobre las pruebas y los resultados
+ observados.>>
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "referencias"
+options "IEEEtran"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
