@@ -1,6 +1,7 @@
 #include "solution.h"
 #include <QDebug>
 #include <iostream>
+#include <math.h>
 
 Solution::Solution()
 {
@@ -26,12 +27,14 @@ QStringList Solution::getNameVariables()
 
 int Solution::getNearbyCity()
 {
+     double test = 0;
     if(this->nearbyCity == -1)
     {
         for(int i=4*n,j=0;i<4*n+n;i++,j++)
         {
-            int test = this->result.at(i);
-            if(test == 1)
+            test = this->result.at(i);
+
+            if(abs(test-1) < 0.00001)//Comparacion entre doubles teniendo en cuenta un margen de error xD
             {
 
                 this->nearbyCity = j;
