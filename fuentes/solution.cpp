@@ -1,4 +1,5 @@
 #include "solution.h"
+#include <QDebug>
 #include <iostream>
 
 Solution::Solution()
@@ -29,8 +30,10 @@ int Solution::getNearbyCity()
     {
         for(int i=4*n,j=0;i<4*n+n;i++,j++)
         {
-            if(this->result.at(i) == 1)
+            int test = this->result.at(i);
+            if(test == 1)
             {
+
                 this->nearbyCity = j;
             }
         }
