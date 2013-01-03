@@ -51,7 +51,7 @@ void Canvas::drawState(int m, QVector<City *> *cities)
         QPixmap pix(":/images/city3.png");
         QGraphicsPixmapItem *item = new QGraphicsPixmapItem(pix.scaled(dx,dy));
         City *c = cities->at(i);
-        item->setPos(c->getCoorX()*dx,(m-c->getCoorY()-1)*dy);
+        item->setPos((c->getCoorX()-0.5)*dx,(m-c->getCoorY()-0.5)*dy);
         addItem(item);
     }
 }
@@ -68,13 +68,13 @@ void Canvas::drawResult(Solution *solution, QVector<City *> *cities, int m)
     /*dibujar basurero*/
     QPixmap pix(":/images/recycle.jpeg");
     QGraphicsPixmapItem *item = new QGraphicsPixmapItem(pix.scaled(dx,dy));
-    item->setPos(Ax*dx,(m-Ay-1)*dy);
+    item->setPos((Ax-0.5)*dx,(m-Ay-0.5)*dy);
     addItem(item);
 
     int nearbyCity = solution->getNearbyCity();
     City *c = cities->at(nearbyCity);
     QGraphicsEllipseItem *item2 = new QGraphicsEllipseItem(0,0,dx,dy);
-    item2->setPos(QPointF(c->getCoorX()*dx,(m-c->getCoorY()-1)*dy));
+    item2->setPos(QPointF((c->getCoorX()-0.5)*dx,(m-c->getCoorY()-0.5)*dy));
 
     QPen pen;
     pen.setWidth(4);
