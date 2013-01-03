@@ -1042,6 +1042,18 @@ Análisis
 Conclusiones
 \end_layout
 
+\begin_layout Itemize
+Lo mas importante al momento de solucionar el problema es tener un modelo
+ que se ajuste lo mejor posible al mismo, ya que un modelo incorrecto o
+ poco robusto tiene como resultado soluciones incorrectas, especialmente
+ en casos que no se pueden probar manualmente.
+\end_layout
+
+\begin_layout Itemize
+Es muy importante estar muy seguros del modelo antes de implementar, pues
+ un error en el mismo lleva a largas etapas de depuración y confusión.
+\end_layout
+
 \begin_layout Standard
 <<Deben haber al menos 2 o 3 conclusiones sobre las pruebas y los resultados
  observados.>>
