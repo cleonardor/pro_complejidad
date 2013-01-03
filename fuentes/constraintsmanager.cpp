@@ -203,24 +203,24 @@ void ConstraintsManager::buildContraints()
 
     //restricciones obvias
 
-    //M-1 >= Ax >= 0
+    //M >= Ax >= 0
     constraintNumber++;
     this->constraints[constraintNumber][Ax] = 1;
     this->constraints[constraintNumber][constant] = 0;
     this->inequalities[constraintNumber] = ">=";
     constraintNumber++;
     this->constraints[constraintNumber][Ax] = 1;
-    this->constraints[constraintNumber][constant] = this->m-1;
+    this->constraints[constraintNumber][constant] = this->m;
     this->inequalities[constraintNumber] = "<=";
 
-    //M-1 >= Ay >= 0
+    //M >= Ay >= 0
     constraintNumber++;
     this->constraints[constraintNumber][Ay] = 1;
     this->constraints[constraintNumber][constant] = 0;
     this->inequalities[constraintNumber] = ">=";
     constraintNumber++;
     this->constraints[constraintNumber][Ay] = 1;
-    this->constraints[constraintNumber][constant] = this->m-1;
+    this->constraints[constraintNumber][constant] = this->m;
     this->inequalities[constraintNumber] = "<=";
 
     //Dx >= 0; Dy >= 0
