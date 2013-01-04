@@ -898,6 +898,12 @@ Para solucionar el problema presentado en este informe se creo un modelo
 \end_layout
 
 \begin_layout Standard
+Para determinar el valor de las variables binarias se tuvo en cuenta un
+ margen de error de 10^-4 aproximadamente, debido a que las variables son
+ reales pero en el modelo se requiere como variables enteras.
+\end_layout
+
+\begin_layout Standard
 El modelo presentado garantiza que el basurero será ubicado dentro de la
  región EcoReg y que la ubicación del mismo cumple con lo descrito anteriormente.
  Las restricciones 
@@ -1066,9 +1072,12 @@ Al comparar los resultados obtenidos de la aplicación creada con los resultados
  basurero seleccionada por los programas no sea la misma.
 \end_layout
 
-\begin_layout Standard
-<<Deben haber al menos 2 o 3 conclusiones sobre las pruebas y los resultados
- observados.>>
+\begin_layout Itemize
+Hay una relación entre el número de ciudades y el tiempo que se demora la
+ solución.
+ Además de esto a pesar de no estar consignado en las pruebas, se sabe que
+ la manera en que están organizadas las ciudades también influye en el tiempo
+ en que se tarda en encontrar la solución.
 \end_layout
 
 \begin_layout Standard
